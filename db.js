@@ -13,14 +13,14 @@ exports.connected = false;
 mongoose.connection
 .on('error', console.error.bind(console, 'DB connection error:'))
 .once('open', function() {
-  console.log ("Database loaded");
+  logger.info ("Database loaded");
 
   exports.Ricetta = RicettaModel;
   exports.connected = true;
 })
 .on('disconnected', function () {
   exports.connected = false;
-  console.log('Mongoose disconnected');
+  logger.info('Mongoose disconnected');
 });
 
 // var ricetta1  = new Ricetta({
