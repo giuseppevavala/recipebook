@@ -6,6 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "supertest": "^1.2.0"
+  },
   "author": "Giuseppe Vavalà",
   "license": "ISC",
   "dependencies": {

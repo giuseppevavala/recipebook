@@ -1,3 +1,7 @@
+// TODO get ricetta che contiene almeno uno degli ingredienti in input
+// l'ordine dev'essere che più l'insieme coincide, meglio è
+// TODO API per le immagini
+// TODO Creare la cartella controller
 /**
  * Module dependencies.
  */
@@ -5,12 +9,10 @@ require("./myutil");
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
-var bodyParser = require('body-parser')
 var ricetta = require ("./ricetta");
+var bodyParser = require('body-parser');
 
-// Setting environment
-app.use(bodyParser.json());
-
+app.use(bodyParser());
 // Entry Point
 app.get('/ricettas', ricetta.getAll);
 app.post('/ricetta', ricetta.putEl);
