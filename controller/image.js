@@ -1,4 +1,4 @@
-var db = require("./db");
+var db = require("../db");
 
 exports.getAll = function (req, res){
   if (!db.connected) return myutil.createResp("Db disconnected", null, res);

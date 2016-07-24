@@ -1,7 +1,5 @@
 // TODO get ricetta che contiene almeno uno degli ingredienti in input
 // l'ordine dev'essere che più l'insieme coincide, meglio è
-// TODO API per le immagini
-// TODO Creare la cartella controller
 /**
  * Module dependencies.
  */
@@ -9,8 +7,8 @@ require("./myutil");
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
-var ricetta = require ("./ricetta");
-var image = require ("./image");
+var ricetta = require ("./controller/ricetta");
+var image = require ("./controller/image");
 var bodyParser = require('body-parser');
 var multer  = require('multer')
 var upload = multer({ dest: '/tmp/image' })
