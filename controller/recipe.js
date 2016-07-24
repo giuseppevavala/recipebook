@@ -2,9 +2,9 @@ var db = require("../db");
 
 exports.getAll = function (req, res){
   if (!db.connected) return myutil.createResp("Db disconnected", null, res);
-  db.Ricetta.find(function (err, ricettas) {
+  db.Recipe.find(function (err, recipes) {
     if (err) return myutil.createResp(err, null, res);
-    myutil.createResp (null, ricettas, res);
+    myutil.createResp (null, recipes, res);
   })
 };
 
@@ -13,11 +13,11 @@ exports.putEl = function (req, res){
   if (!db.connected) return myutil.createResp("Db disconnected", null, res);
   try{
     var obj = req.body;
-    var ricetta  = new db.Ricetta(obj);
+    var recipe  = new db.Recipe(obj);
 
-    ricetta.save(function (err) {
+    recipe.save(function (err) {
       if (err) return myutil.createResp(err, null, res);
-      myutil.createResp (null, ricetta, res);
+      myutil.createResp (null, recipe, res);
     });
   }catch(err) {
     myutil.createResp(err, null, res);

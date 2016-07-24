@@ -1,10 +1,10 @@
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/test');
 
-var RicettaSchema = mongoose.Schema({
-  nome: String,
-  ingredienti: Array,
-  procedimento: String,
+var RecipeSchema = mongoose.Schema({
+  name: String,
+  ingredient: Array,
+  procedure: String,
   image: mongoose.Schema.Types.ObjectId
 });
 
@@ -13,7 +13,7 @@ var ImageSchema = mongoose.Schema({
   fileName: String
 });
 
-var RicettaModel = mongoose.model('Ricetta', RicettaSchema);
+var RecipeModel = mongoose.model('Recipe', RecipeSchema);
 var ImageModel = mongoose.model('Image', ImageSchema);
 
 exports.connected = false;
@@ -22,7 +22,7 @@ mongoose.connection
 .once('open', function() {
   logger.info ("Database loaded");
 
-  exports.Ricetta = RicettaModel;
+  exports.Recipe = RecipeModel;
   exports.Image = ImageModel;
   exports.connected = true;
 })
@@ -31,21 +31,21 @@ mongoose.connection
   logger.info('Mongoose disconnected');
 });
 
-// var ricetta1  = new Ricetta({
+// var recipe1  = new Recipe({
 //   nome: 'Pollo e Patate al forno',
 //   ingredienti: ['pollo', 'patate', 'rosmarino', 'pane grattuggiato'],
 //   procedimento: 'Mettere in una teglia il pollo e le patate, spolverare con pane grattuggiato, aggiungere il rosmarino, girare e mettere in forno a 220 gradi per 20 minuti'
 // });
 
-// ricetta1.save(function (err) {
+// recipe1.save(function (err) {
 //   if (err) return console.log(err);
-//   console.log('Ricetta salvata');
+//   console.log('Recipe salvata');
 // });
 //
-// Ricetta.find(function (err, ricettas) {
+// Recipe.find(function (err, recipes) {
 //   if (err) return console.error(err);
-//   ricettas.forEach(function(ricetta){
-//     console.log(ricetta);
+//   recipes.forEach(function(recipe){
+//     console.log(recipe);
 //   })
 // })
 //

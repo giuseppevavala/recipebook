@@ -4,10 +4,10 @@ var chai = require('chai'),
 var request = require('supertest');
 require('it-each')();
 
-var ricetta1  = {
-  nome: 'Pollo e Patate al forno',
-  ingredienti: ['pollo', 'patate', 'rosmarino', 'pane grattuggiato'],
-  procedimento: 'Mettere in una teglia il pollo e le patate, spolverare con pane grattuggiato, aggiungere il rosmarino, girare e mettere in forno a 220 gradi per 20 minuti'
+var recipe1  = {
+  name: 'Pollo e Patate al forno',
+  ingredient: ['pollo', 'patate', 'rosmarino', 'pane grattuggiato'],
+  procedure: 'Mettere in una teglia il pollo e le patate, spolverare con pane grattuggiato, aggiungere il rosmarino, girare e mettere in forno a 220 gradi per 20 minuti'
 };
 
 request = request('http://localhost:7000');
@@ -18,7 +18,7 @@ describe('Test base', function() {
   this.timeout(10000);
 
   it('Should list existing element', function(done) {
-    request.get('/ricette')
+    request.get('/recipes')
       .expect(200)
       .end(function(err, res) {
         var resp = res.body;
@@ -37,9 +37,9 @@ describe('Test base', function() {
   })
 
   it('Should put new element', function(done) {
-    request.post('/ricetta')
+    request.post('/recipe')
       .set('Content-Type',  'application/json')
-      .send (ricetta1)
+      .send (recipe1)
       .expect(200)
       .end(function(err, res) {
         var resp = res.body;
@@ -57,7 +57,7 @@ describe('Test base', function() {
 
 
   it('Should list existing element and check elements number', function(done) {
-    request.get('/ricette')
+    request.get('/recipes')
       .expect(200)
       .end(function(err, res) {
         var resp = res.body;
