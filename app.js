@@ -20,7 +20,10 @@ app.use('/static/image', express.static(MY_IMAGE_DIR));
 // Entry Point
 app.get('/recipes', recipe.getAll);
 app.get('/recipe/:id', recipe.getEl);
+app.get('/recipe/find/:query', recipe.findRecipe);
 app.post('/recipe', recipe.putEl);
+
+app.get('/recipes/ingredients', recipe.getAllIngredients)
 
 app.get('/images', image.getAll);
 app.get('/image/:id', image.getEl);

@@ -1,4 +1,5 @@
 var db = require("../db");
+var queryString = require('query-string');
 
 exports.getAll = function (req, res){
   logger.info (req.method + " " + req.path);
@@ -6,6 +7,21 @@ exports.getAll = function (req, res){
   db.Recipe.find(function (err, recipes) {
     if (err) return myutil.createResp(err, null, res);
     myutil.createResp (null, recipes, res);
+  })
+};
+
+exports.getAllIngredients = function (req, res){
+  logger.info (req.method + " " + req.path);
+  if (!db.connected) return myutil.createResp("Db disconnected", null, res);
+  db.Recipe.find(function (err, recipes) {
+    if (err) return myutil.createResp(err, null, res);
+
+    var ingredients = [];
+    recipes.forEach (function (recipe){
+      ingredients = arrayUnique (ingredients.concat (recipe.ingredients));
+    });
+
+    myutil.createResp (null, ingredients, res);
   })
 };
 
@@ -18,6 +34,26 @@ exports.getEl = function (req, res){
     myutil.createResp (null, recipes[0], res);
   })
 };
+
+exports.findRecipe = function (req, res){
+  if (!db.connected) return myutil.createResp("Db disconnected", null, res);
+
+  try{
+    logger.info (req.method + " " + req.path);
+    var query = queryString.parse(req.params.query);
+    logger.debug (query);
+
+    //patch of queryString
+    if (typeof query.ingredients == 'string') query.ingredients = [query.ingredients];
+
+    db.Recipe.find({'ingredients': {$in: query.ingredients}}, function (err, recipes) {
+      if (err) return myutil.createResp(err, null, res);
+      myutil.createResp (null, recipes, res);
+    });
+  }catch(err) {
+    myutil.createResp(err, null, res);
+  }
+}
 
 exports.putEl = function (req, res){
   logger.info (req.method + " " + req.path);

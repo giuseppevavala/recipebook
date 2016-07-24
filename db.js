@@ -3,7 +3,7 @@ mongoose.connect('mongodb://localhost/test');
 
 var RecipeSchema = mongoose.Schema({
   name: String,
-  ingredient: Array,
+  ingredients: Array,
   procedure: String,
   image: mongoose.Schema.Types.ObjectId
 });
