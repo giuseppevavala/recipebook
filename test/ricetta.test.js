@@ -18,10 +18,10 @@ describe('Test base', function() {
   this.timeout(10000);
 
   it('Should list existing element', function(done) {
-    request.get('/ricettas')
+    request.get('/ricette')
       .expect(200)
       .end(function(err, res) {
-        var resp = JSON.parse(res.text);
+        var resp = res.body;
 
         expect(err).to.be.null;
         expect(res).to.be.an('object');
@@ -42,7 +42,7 @@ describe('Test base', function() {
       .send (ricetta1)
       .expect(200)
       .end(function(err, res) {
-        var resp = JSON.parse(res.text);
+        var resp = res.body;
 
         expect(err).to.be.null;
         expect(res).to.be.an('object');
@@ -57,10 +57,10 @@ describe('Test base', function() {
 
 
   it('Should list existing element and check elements number', function(done) {
-    request.get('/ricettas')
+    request.get('/ricette')
       .expect(200)
       .end(function(err, res) {
-        var resp = JSON.parse(res.text);
+        var resp = res.body;
 
         expect(err).to.be.null;
         expect(res).to.be.an('object');

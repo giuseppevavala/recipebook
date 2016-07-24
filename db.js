@@ -5,9 +5,16 @@ var RicettaSchema = mongoose.Schema({
   nome: String,
   ingredienti: Array,
   procedimento: String,
-  immagine: mongoose.Schema.Types.ObjectId
+  image: mongoose.Schema.Types.ObjectId
 });
+
+var ImageSchema = mongoose.Schema({
+  path: String,
+  fileName: String
+});
+
 var RicettaModel = mongoose.model('Ricetta', RicettaSchema);
+var ImageModel = mongoose.model('Image', ImageSchema);
 
 exports.connected = false;
 mongoose.connection
@@ -16,6 +23,7 @@ mongoose.connection
   logger.info ("Database loaded");
 
   exports.Ricetta = RicettaModel;
+  exports.Image = ImageModel;
   exports.connected = true;
 })
 .on('disconnected', function () {

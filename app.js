@@ -10,12 +10,18 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var ricetta = require ("./ricetta");
+var image = require ("./image");
 var bodyParser = require('body-parser');
+var multer  = require('multer')
+var upload = multer({ dest: '/tmp/image' })
+
 
 app.use(bodyParser());
 // Entry Point
-app.get('/ricettas', ricetta.getAll);
+app.get('/ricette', ricetta.getAll);
 app.post('/ricetta', ricetta.putEl);
+app.get('/images', image.getAll);
+app.post('/image', upload.single('imageFile'), image.putEl);
 
 // Server listen
 http.listen(7000, function(){

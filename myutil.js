@@ -7,7 +7,7 @@ var createResp = function (err, value, res){
   }else{
     var resp = {status: 'ok', value: value};
   }
-  res.status(200).end(JSON.stringify(resp));
+  res.status(200).send(resp).end();
 }
 
 global.logger = new Log("DEBUG");
