@@ -11,6 +11,7 @@ exports.getAll = function (req, res){
 };
 
 exports.getAllIngredients = function (req, res){
+  // TODO con l'aumentare di richieste si deve rendere più efficente
   logger.info (req.method + " " + req.path);
   if (!db.connected) return myutil.createResp("Db disconnected", null, res);
   db.Recipe.find(function (err, recipes) {
