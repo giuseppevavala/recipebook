@@ -15,6 +15,8 @@ var upload = multer({ dest: '/tmp/image' })
 
 
 app.use(bodyParser());
+app.use('/static/image', express.static(MY_IMAGE_DIR));
+
 // Entry Point
 app.get('/recipes', recipe.getAll);
 app.get('/recipe/:id', recipe.getEl);

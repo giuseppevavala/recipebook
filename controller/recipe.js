@@ -1,6 +1,7 @@
 var db = require("../db");
 
 exports.getAll = function (req, res){
+  logger.info (req.method + " " + req.path);
   if (!db.connected) return myutil.createResp("Db disconnected", null, res);
   db.Recipe.find(function (err, recipes) {
     if (err) return myutil.createResp(err, null, res);
@@ -9,6 +10,7 @@ exports.getAll = function (req, res){
 };
 
 exports.getEl = function (req, res){
+  logger.info (req.method + " " + req.path);
   if (!db.connected) return myutil.createResp("Db disconnected", null, res);
   db.Recipe.find({_id: req.params.id}, function (err, recipes) {
     if (err) return myutil.createResp(err, null, res);
@@ -18,7 +20,7 @@ exports.getEl = function (req, res){
 };
 
 exports.putEl = function (req, res){
-  logger.debug (req.text);
+  logger.info (req.method + " " + req.path);
   if (!db.connected) return myutil.createResp("Db disconnected", null, res);
   try{
     var obj = req.body;

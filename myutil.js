@@ -6,9 +6,11 @@ var createResp = function (err, value, res){
     logger.error (resp);
   }else{
     var resp = {status: 'ok', value: value};
+    logger.debug (resp);
   }
   res.status(200).send(resp).end();
 }
 
-global.logger = new Log("DEBUG");
+global.logger = new Log("INFO");
 global.myutil = {createResp: createResp};
+global.MY_IMAGE_DIR = "/tmp/image";

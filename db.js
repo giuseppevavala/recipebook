@@ -10,7 +10,7 @@ var RecipeSchema = mongoose.Schema({
 
 var ImageSchema = mongoose.Schema({
   path: String,
-  fileName: String
+  filename: String
 });
 
 var RecipeModel = mongoose.model('Recipe', RecipeSchema);

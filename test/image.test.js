@@ -5,6 +5,7 @@ var request = require('supertest');
 
 request = request('http://localhost:7000');
 var imageId = null;
+var imageFileName = null;
 var numberOfImages = -1;
 
 describe('Image', function() {
@@ -64,6 +65,17 @@ describe('Image', function() {
 				expect(resp.value).to.be.an('object');
 				expect(resp.value._id).to.be.equal(imageId);
 
+				imageFilename = resp.value.filename;
+
+				done();
+			});
+	})
+
+	it('Should get image file', function(done) {
+		request.get('/static/image/' + imageFilename)
+			.expect(200)
+			.end(function(err, res) {
+				expect(err).to.be.null;
 
 				done();
 			});
