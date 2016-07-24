@@ -43,9 +43,32 @@ describe('Image', function() {
 				expect(resp).to.have.property('status');
 				expect(resp.status).to.be.equal('ok');
 
+				imageId = resp.value._id;
+
         done();
       });
   });
+
+	it('Should get element', function(done) {
+		request.get('/image/' + imageId)
+			.expect(200)
+			.end(function(err, res) {
+				var resp = res.body;
+
+				expect(err).to.be.null;
+				expect(res).to.be.an('object');
+				expect(res).to.have.property('body');
+				expect(resp).to.have.property('status');
+				expect(resp.status).to.be.equal('ok');
+				expect(resp).to.have.property('value');
+				expect(resp.value).to.be.an('object');
+				expect(resp.value._id).to.be.equal(imageId);
+
+
+				done();
+			});
+	})
+
 
 	it('Should get all images', function(done) {
     request.get('/images')

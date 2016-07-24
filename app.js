@@ -17,8 +17,11 @@ var upload = multer({ dest: '/tmp/image' })
 app.use(bodyParser());
 // Entry Point
 app.get('/recipes', recipe.getAll);
+app.get('/recipe/:id', recipe.getEl);
 app.post('/recipe', recipe.putEl);
+
 app.get('/images', image.getAll);
+app.get('/image/:id', image.getEl);
 app.post('/image', upload.single('imageFile'), image.putEl);
 
 // Server listen

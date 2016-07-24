@@ -8,6 +8,15 @@ exports.getAll = function (req, res){
   })
 };
 
+exports.getEl = function (req, res){
+  if (!db.connected) return myutil.createResp("Db disconnected", null, res);
+  db.Recipe.find({_id: req.params.id}, function (err, recipes) {
+    if (err) return myutil.createResp(err, null, res);
+    if (recipes.length == 0) return myutil.createResp(new Error("Id not found"), null, res);
+    myutil.createResp (null, recipes[0], res);
+  })
+};
+
 exports.putEl = function (req, res){
   logger.debug (req.text);
   if (!db.connected) return myutil.createResp("Db disconnected", null, res);
